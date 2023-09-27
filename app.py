@@ -35,9 +35,15 @@ tokenizer = load_tokenizer(model_path)
 user_input = st.text_area('Enquire about the Menu')
 button = st.button("Enter")
 if user_input and button :
-    sequence2 = user_input
-    max_len = 50
-    answer=generate_text(model, tokenizer, sequence2, max_len)
-    answers = re.findall(r'\[A\] (.*?)\n', answer)
-    result = '\n'.join(answers)
-    st.write("Answer: ",result)
+    try:
+        sequence2 = user_input
+        max_len = 50
+        answer=generate_text(model, tokenizer, sequence2, max_len)
+        answers = re.findall(r'\[A\] (.*?)\n', answer)
+        result = '\n'.join(answers)
+        if result:
+            st.write("Answer: ",result)
+        else:
+            st.write("Answer :","Sorry ! i could not able to provide the details")
+    except:
+        st.write("Answer: ","Try again")
